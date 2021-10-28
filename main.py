@@ -7,6 +7,22 @@ player = FirstPersonController()#player 를 만듬
 window.fps_counter.enabled = False #fps 수치 지우는거
 window.exit_button.visible = False #빨강색 종료 버튼 
 
+blocks=[
+    load_texture('picture1.png'),
+    load_texture('coblestone.png'),
+    load_texture('diamond.png'),
+]
+block_id = 1
+
+def input(key):
+    global block_id
+
+    if key.isdigit():#만약 숫자가 입력이 된다면 
+        block_id = int(key)#block_id에 int형으로 숫자를 넣음
+
+        if block_id >= len(blocks):
+            block_id = len(blocks) -1
+        print(block_id)
 #배경 신 class 세계의 사물
 Entity(
     parent=scene,#3d 존재 사실 알림
@@ -19,7 +35,7 @@ Entity(
 
 #객체 마크에 쓰일 블록하나
 class Voxel(Button):
-    def __init__(self,position=(0,0,0),texture='brick'):
+    def __init__(self,position=(0,0,0),texture=blocks[block_id]):
         super().__init__(
             parent=scene,#3D 공간이 있음을 의미함 parent 형의 기본형이 이거임 UI 쓸려면 camera.ui 사용 하셈 
             position=position,#포지션 위치 바닥
