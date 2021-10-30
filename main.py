@@ -7,9 +7,10 @@ window.fps_counter.enabled = False #fps 수치 지우는거
 window.exit_button.visible = False #빨강색 종료 버튼 
 
 blocks=[
-    'dirt.png','assets/coblestone.png','assets/diamond.png','assets/tree.png'
+    'dirt.png','assets/coblestone.png','assets/diamond.png','assets/wood.png','assets/grass.png'
 ]
-block_id = 0
+
+block_id = 1
 
 def input(key):
     global block_id
@@ -31,17 +32,10 @@ Entity(
     #텍스쳐를 구의 양면에 적용   = * 양 면 * =
 )
 
-hand = Entity(
-    parent = camera.ui,
-    model='tree.png',
-    texture=blocks[block_id],
-    scale=0.2,
-    position=Vec2(0.5,-0.5)
-)
 
 #객체 마크에 쓰일 블록하나
 class Voxel(Button):
-    def __init__(self,position=(0,0,0),texture='assets/tree.png'):
+    def __init__(self,position=(0,0,0),texture='assets/wood.png'):
         super().__init__(
             parent=scene,#3D 공간이 있음을 의미함 parent 형의 기본형이 이거임 UI 쓸려면 camera.ui 사용 하셈 
             position=position,#포지션 위치 바닥
@@ -68,6 +62,8 @@ class Voxel(Button):
 for z in range(20):
     for x in range(20):
         blok=Voxel(position=(x,0,z))#위에 만들어놓은 블록 객체를 쓴거임 ㅎㅎ
+        blok=Voxel(position=(x,-1,z))
+        blok=Voxel(position=(x,-2,z))
 
 #ursina 함수인데 이렇게하면 플레이어 만들어줌 ㅎ
 player = FirstPersonController()#player 를 만듬        
